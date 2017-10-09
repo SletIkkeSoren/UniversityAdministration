@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using UniversityAdministration.Models;
 
 namespace UniversityAdministration
 {
@@ -22,6 +24,9 @@ namespace UniversityAdministration
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddDbContext<UniversityAdministrationContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("UniversityAdministrationContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,7 +48,7 @@ namespace UniversityAdministration
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Students}/{action=Index}/{id?}");
             });
         }
     }
