@@ -50,6 +50,8 @@ namespace UniversityAdministration
                     name: "default",
                     template: "{controller=Students}/{action=Index}/{id?}");
             });
+
+            DbInitializer.Initialize(context);
         }
     }
 }
